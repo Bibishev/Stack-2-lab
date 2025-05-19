@@ -5,8 +5,10 @@
 #include "../StackH/ListStack.h"
 #include "../StackH/VectorStack.h"
 
-Stack::Stack(StackContainer container) : _containerType(container) {
-    switch (container) {
+Stack::Stack(StackContainer container) : _containerType(container)
+{
+    switch (container)
+    {
         case StackContainer::List: 
             _pimpl = new ListStack();
             break;
@@ -18,9 +20,10 @@ Stack::Stack(StackContainer container) : _containerType(container) {
     }
 }
 
-Stack::Stack(const ValueType* valueArray, const int arraySize, StackContainer container) 
-    : _containerType(container) {
-    switch (container) {
+Stack::Stack(const ValueType* valueArray, const int arraySize, StackContainer container) : _containerType(container)
+    {
+    switch (container)
+    {
         case StackContainer::List: 
             _pimpl = new ListStack(valueArray, arraySize);
             break;
@@ -32,9 +35,11 @@ Stack::Stack(const ValueType* valueArray, const int arraySize, StackContainer co
     }
 }
 
-Stack::Stack(const Stack& other) {
+Stack::Stack(const Stack& other)
+{
     _containerType = other._containerType;
-    switch (_containerType) {
+    switch (_containerType)
+    {
         case StackContainer::List: 
             _pimpl = new ListStack(*dynamic_cast<ListStack*>(other._pimpl));
             break;
@@ -46,33 +51,40 @@ Stack::Stack(const Stack& other) {
     }
 }
 
-Stack& Stack::operator=(const Stack& other) {
+Stack& Stack::operator=(const Stack& other)
+{
     Stack temp = Stack(other);
     std::swap(this->_containerType, temp._containerType);
     std::swap(this->_pimpl, temp._pimpl);
     return *this;
 }
 
-Stack::~Stack() {
+Stack::~Stack()
+{
     delete _pimpl;
 }
 
-void Stack::push(const ValueType& value) {
+void Stack::push(const ValueType& value)
+{
     _pimpl->push(value);
 }
 
-void Stack::pop() {
+void Stack::pop()
+{
     _pimpl->pop();
 }
 
-const ValueType& Stack::top() const {
+const ValueType& Stack::top() const
+{
     return _pimpl->top();
 }
 
-bool Stack::isEmpty() const {
+bool Stack::isEmpty() const
+{
     return _pimpl->isEmpty();
 }
 
-int Stack::size() const {
+int Stack::size() const
+{
     return _pimpl->size();
 }
